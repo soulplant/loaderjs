@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "es3",
+        "lib": [
+            "dom",
+            "es2015",
+            "es2015.promise"
+        ]
+    }
+}
