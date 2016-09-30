@@ -10,11 +10,16 @@ describe("javascript", () => {
 });
 
 describe("Importer", () => {
-    it("can extract deps", () => {
-        var deps = Importer.getDeps(`
-        var a = require('this');
-        var b = require("is");
-        `);
-        expect(deps).toEqual(['this', 'is']);
+    var fetcher = new FakeFetcher();
+    fetcher.setData('a', `exports.a = require('b').b;`);
+    fetcher.setData('b', `exports.b = 5;`);
+
+    var importer = new Importer(fetcher);
+
+    it("can import modules recursively", (done) => {
+        importer.import('a').then((obj) => {
+            expect(obj.a).toBe(5);
+            done();
+        });
     });
 });

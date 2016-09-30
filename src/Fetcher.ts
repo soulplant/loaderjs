@@ -27,7 +27,7 @@ export class XhrFetcher implements Fetcher {
 }
 
 export class FakeFetcher implements Fetcher {
-    private data: {[url: string]: string};
+    private data: {[url: string]: string} = {};
 
     public fetch(url: string): Promise<string> {
         return new Promise((resolve, fail) => {
